@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <style>
+        .tomato {
+            font-size: 100px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        #commandcenter {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+
+        #start {
+            height: 4em;
+            width: 10em;
+        }
+
+        #pause {
+            height: 4em;
+            width: 10em;
+        }
+
+        #reset {
+            height: 4em;
+            width: 10em;
+        }
+    </style>
+</head>
+
+<body onload="cdreset()">
+    <div class="tomato">
+        <span id="countmin"></span><img src=""
+        <span id="timespan"></span>
+    </div>
+    <div id="commandcenter">
+        <input id="start" type="button" value="Start" onclick="countdown()">
+        <input id="pause" type="button" value="Pause" onclick="cdpause()">
+        <input id="reset" type="button" value="Reset" onclick="cdreset()">
+    </div>
+    <script>
+
+        var COUNTsec = "00";
+        var COUNTmin = 1;
+
+        var t, count;
+
+        function cddisplay() {
+            // displays time in span
+            document.getElementById('timespan').innerHTML = count;
+            document.getElementById('countmin').innerHTML = min;
+
+        };
+
+
+
+        function countdown() {
+            // starts countdown
+            cddisplay();
+            if (count == 0) {
+                min--;
+                count = 10;
+                countdown();
+                if (min === 0 || count === 0) {
+                    document.getElementById("start").disabled = true;
+                    document.getElementById("pause").disabled = true;
+                    var audio = new Audio('http://soundbible.com/grab.php?id=2218&type=mp3');
+                    audio.play();
+                    clearTimeout(t);
+                }
+                // time is up
+            } else {
+                count--;
+                t = setTimeout("countdown()", 1000);
+            }
+        };
+
+        function cdpause() {
+            // pauses countdown
+            clearTimeout(t);
+        };
+
+        function cdreset() {
+            // resets countdown
+            cdpause();
+            count = COUNTsec;
+            min = COUNTmin;
+            document.getElementById("start").disabled = false;
+            document.getElementById("pause").disabled = false;
+            cddisplay();
+        };
+
+
+    </script>
+
+    </body

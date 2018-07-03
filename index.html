@@ -21,12 +21,11 @@
 
     <div id="buttons">
         <button id='start' onclick='start()'>Start</button> 
-        
-        [Pause] [Reset]
+        <button id='pause' onclick='pause()'>Pause</button>
+        <button id='reset' onclick="reset()">Reset</button>
     </div>
 
     <script>
-
 let secondsRemaining = 5;
 const tickDelay = 1000;
 
@@ -34,36 +33,21 @@ function tick() {
     secondsRemaining -= 1;
     
     updateClock();
-
     if (secondsRemaining > 0) {
         setTimeout(tick, tickDelay);
     }
 }
-
 function start() {
     setTimeout(tick, tickDelay);
 }
-
 function updateClock() {
     let clock = document.getElementById('clock');
     // todo: formatting
     clock.textContent = secondsRemaining;
 }
-
-
 updateClock();
+
 
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
